@@ -96,6 +96,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         printCurrentScript()
     }
 })
+function No_Money_for_you () {
+    No_money_for_you_1 = createScript("Mr. Kao", "Im tired of you always asking for money! Go away!", 2)
+    No_money_for_u_2 = createScript("pineapple", "Ok, Ill give you a deal", 3)
+    no_money_for_u_3 = createScript("pineapple", "4$ for 2 water and cheetos", 0)
+    blockObject.setAnyProperty(No_money_for_you_1, AnyProp.NextPage, No_money_for_u_2)
+    blockObject.setAnyProperty(No_money_for_u_2, AnyProp.NextPage, no_money_for_u_3)
+    return No_money_for_you_1
+}
 function finalChoice () {
     FinalChoice1 = createScript("Old Man", "Well, I just need enough water for this garden here", 0)
     FinalChoice2 = createScript("Cloud", "I can make that happen! What's the magic word?", 0)
@@ -143,7 +151,8 @@ function imAnOldMan () {
     oldman2 = createScript("Pineapple", "OK, just give me $2 and I will get you water", 3)
     blockObject.setAnyProperty(oldman1, AnyProp.NextPage, oldman2)
     blockObject.setStringArrayProperty(oldman2, StrArrayProp.Choices, ["OK here's $2!", "NO MONEY FOR YOU!!"])
-    blockObject.setAnyProperty(oldman2, AnyProp.Choice1, happyEnding())
+    blockObject.setAnyProperty(oldman2, AnyProp.Choice2, happyEnding())
+    blockObject.setAnyProperty(oldman2, AnyProp.Choice2, No_Money_for_you())
     return oldman1
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -165,6 +174,9 @@ let oldman1: blockObject.BlockObject = null
 let printingStuff = false
 let FinalChoice2: blockObject.BlockObject = null
 let FinalChoice1: blockObject.BlockObject = null
+let no_money_for_u_3: blockObject.BlockObject = null
+let No_money_for_u_2: blockObject.BlockObject = null
+let No_money_for_you_1: blockObject.BlockObject = null
 let makingChoice = false
 let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
