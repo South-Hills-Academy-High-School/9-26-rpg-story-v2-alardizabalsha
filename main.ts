@@ -44,13 +44,13 @@ function happyEnding () {
     return happy1
 }
 function imSorry () {
-    oldman1 = createScript("Mr. Kao", "I'm sorry! I forgot to pay the water company! Spare me cloud sir", 1)
-    oldman2 = createScript("Pineapple", "Aren't you a polite one! Very well, I forgive you! But you must pay me back!", 1)
-    blockObject.setAnyProperty(oldman1, AnyProp.NextPage, oldman2)
-    blockObject.setStringArrayProperty(oldman2, StrArrayProp.Choices, ["NO, I don't owe you !", "Yes! Just let me live please:)"])
-    blockObject.setAnyProperty(oldman2, AnyProp.Choice2, happyEnding())
-    blockObject.setAnyProperty(oldman2, AnyProp.Choice1, No_you_derserve_nothing())
-    return oldman1
+    sorry1 = createScript("Mr. Kao", "I'm sorry! I forgot to pay the water company! Spare me cloud sir", 1)
+    sorry2 = createScript("Pineapple", "Aren't you a polite one! Very well, I forgive you! But you must pay me back!", 1)
+    sorry3 = createScript("Pineapple", "Just kiddin! Heres some money", 1)
+    blockObject.setAnyProperty(sorry1, AnyProp.NextPage, sorry2)
+    blockObject.setAnyProperty(sorry2, AnyProp.NextPage, sorry3)
+    blockObject.setAnyProperty(sorry3, AnyProp.NextPage, finalChoice())
+    return sorry1
 }
 // microsoft/arcade-block-objects
 // 
@@ -167,12 +167,6 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         updateChoices()
     }
 })
-function No_you_derserve_nothing () {
-    No_money_for_you_1 = createScript("Mr. Kao", "You think I owe you anything? NO!", 2)
-    No_money_for_u_2 = createScript("pineapple", "How dare you! Perish old one!", 3)
-    blockObject.setAnyProperty(No_money_for_you_1, AnyProp.NextPage, No_money_for_u_2)
-    return No_money_for_you_1
-}
 function createScript (characterName: string, text: string, portrait: number) {
     newScript = blockObject.create()
     blockObject.setStringProperty(newScript, StrProp.Name, characterName)
@@ -181,6 +175,8 @@ function createScript (characterName: string, text: string, portrait: number) {
     return newScript
 }
 let newScript: blockObject.BlockObject = null
+let oldman2: blockObject.BlockObject = null
+let oldman1: blockObject.BlockObject = null
 let printingStuff = false
 let FinalChoice2: blockObject.BlockObject = null
 let FinalChoice1: blockObject.BlockObject = null
@@ -192,8 +188,9 @@ let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
 let startScript: blockObject.BlockObject = null
 let choiceIndex = 0
-let oldman2: blockObject.BlockObject = null
-let oldman1: blockObject.BlockObject = null
+let sorry3: blockObject.BlockObject = null
+let sorry2: blockObject.BlockObject = null
+let sorry1: blockObject.BlockObject = null
 let happy4: blockObject.BlockObject = null
 let happy3: blockObject.BlockObject = null
 let happy2: blockObject.BlockObject = null
